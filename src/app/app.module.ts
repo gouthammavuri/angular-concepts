@@ -12,13 +12,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PdfExportComponent } from './pdf-export/pdf-export.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AngularTableComponent,
-    JqueryDatatablesComponent
+    JqueryDatatablesComponent,
+    PdfExportComponent
   ],
   imports: [
     BrowserModule,
