@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import html2canvas from 'html2canvas';
-import jspdf from 'jspdf';
+import jsPDF, { HTMLOptions } from 'jspdf';
+import { jsPDFOptions } from 'jspdf';
 import { DataTablesResponse } from '../models/datatables-response';
 
 @Component({
@@ -46,40 +47,29 @@ export class PdfExportComponent implements OnInit {
   getPDF() {
 
     let htmlData: HTMLElement = document.getElementById('htmlData') as HTMLElement;
+    console.log('htmlData', htmlData);
 
-    html2canvas(htmlData).then(function (canvas) {
-      canvas.getContext('2d');
-      let HTML_Width = canvas.width;
-      let HTML_Height = canvas.height;
-      let top_left_margin = 15;
-      let PDF_Width = HTML_Width + (top_left_margin * 2);
-      let PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
-      let canvas_image_width = HTML_Width;
-      let canvas_image_height = HTML_Height;
+    let options: jsPDFOptions = {
+      orientation: 'portrait',
+      unit: 'pt',
+      format: 'a1'
+    };
 
-      let totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-      console.log(canvas.height + "  " + canvas.width);
-
-
-      let imgData = canvas.toDataURL("image/jpeg", 1.0);
-      let pdf = new jspdf('p', 'pt', [PDF_Width, PDF_Height]);
-      pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-
-
-      for (let i = 1; i <= totalPDFPages; i++) {
-        pdf.addPage([PDF_Width, PDF_Height]);
-        let margin = -(PDF_Height * i) + (top_left_margin * 4);
-        if (i > 1) {
-          margin = margin + i * 8;
-        }
-        console.log(top_left_margin);
-        console.log(top_left_margin);
-        console.log(-(PDF_Height * i) + (top_left_margin * 4));
-        pdf.addImage(imgData, 'JPG', top_left_margin, margin, canvas_image_width, canvas_image_height);
-
+    let htmlOptions: HTMLOptions = {
+      html2canvas: {
+        logging: false,
+        backgroundColor: '#fff',
+        allowTaint: true,
+        taintTest: false,
+        async: false,
+        height: 1300,
+        width: 1650,
       }
+    };
 
-      pdf.save("HTML-Document.pdf");
+    let pdf = new jsPDF(options);
+    pdf.html(htmlData, htmlOptions).then(() => {
+      pdf.save('abc.pdf');
     });
   };
 }
