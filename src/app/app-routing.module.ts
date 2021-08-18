@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularTableComponent } from './angular-table/angular-table.component';
 import { JqueryDatatablesComponent } from './jquery-datatables/jquery-datatables.component';
+import { MatConExComponent } from './mat-con-ex/mat-con-ex.component';
 import { PdfExportComponent } from './pdf-export/pdf-export.component';
 
 const routes: Routes = [{
@@ -10,6 +11,8 @@ const routes: Routes = [{
     path:'jquerydatatable', component: JqueryDatatablesComponent
   }, {
     path:'pdfexport', component: PdfExportComponent
+  }, {
+    path:'matcontrol', component: MatConExComponent
   }];
 
 @NgModule({

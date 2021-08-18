@@ -9,10 +9,16 @@ import { JqueryDatatablesComponent } from './jquery-datatables/jquery-datatables
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PdfExportComponent } from './pdf-export/pdf-export.component';
+import { MatConExComponent } from './mat-con-ex/mat-con-ex.component';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -20,7 +26,8 @@ import { PdfExportComponent } from './pdf-export/pdf-export.component';
     AppComponent,
     AngularTableComponent,
     JqueryDatatablesComponent,
-    PdfExportComponent
+    PdfExportComponent,
+    MatConExComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +39,15 @@ import { PdfExportComponent } from './pdf-export/pdf-export.component';
     MatSortModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule, 
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [CurrencyPipe],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
