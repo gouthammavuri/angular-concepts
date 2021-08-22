@@ -1,0 +1,9 @@
+<form [formGroup]="exForm">
+    <mat-form-field appearance="fill">
+        <input matInput [matDatepicker]="picker" name="matcalender" formControlName="matDateControl"
+            placeholder="mm/dd/yyyy" autocomplete="off" >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error class="alert  alert-danger" *ngIf="hasError('matDateControl', 'dateInvalid')">Invalid Date</mat-error>
+    </mat-form-field>
+</form>

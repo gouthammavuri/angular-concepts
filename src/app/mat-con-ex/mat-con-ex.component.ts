@@ -3,25 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as moment from 'moment';
 import { DateValidator } from '../date-validator';
-
 
 @Component({
   selector: 'app-mat-con-ex',
   templateUrl: './mat-con-ex.component.html',
   styleUrls: ['./mat-con-ex.component.css'],
   providers: [
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE]
-    },
-    {
-      provide: MAT_DATE_FORMATS,
-      useValue: MAT_MOMENT_DATE_FORMATS
-    }
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
   ]
 })
+
 export class MatConExComponent implements OnInit {
 
   currencyCode: string = '';
@@ -43,7 +37,7 @@ export class MatConExComponent implements OnInit {
         sampleDate:['', [
           Validators.required, Validators.maxLength(10)]
         ]   
-    })
+    });
   }
 
   transformAmount(){

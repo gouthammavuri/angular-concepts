@@ -6,9 +6,9 @@
         <input matInput placeholder="Enter Age" type="number" formControlName= "age" autocomplete="off" />
     </mat-form-field>
     <mat-form-field appearance="fill">
-        <input matInput [matDatepicker]="dp" formControlName="sampleDate" placeholder="mm/dd/yyyy" autocomplete="off">
-        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker #dp startView="multi-year" panelClass="example-month-picker"></mat-datepicker>
+        <input matInput name="jqueryDate" [matDatepicker]="picker" placeholder="mm/dd/yyyy" #pickerInput formControlName="sampleDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 </form>
 <button [disabled]="exForm.invalid"

@@ -19,6 +19,7 @@ import { MatConExComponent } from './mat-con-ex/mat-con-ex.component';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCalComponent } from './mat-cal/mat-cal.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     AngularTableComponent,
     JqueryDatatablesComponent,
     PdfExportComponent,
-    MatConExComponent
+    MatConExComponent,
+    MatCalComponent
   ],
   imports: [
     BrowserModule,
