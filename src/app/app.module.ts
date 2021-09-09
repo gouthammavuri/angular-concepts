@@ -20,6 +20,9 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCalComponent } from './mat-cal/mat-cal.component';
+import { AutocomExComponent } from './autocom-ex/autocom-ex.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -29,7 +32,8 @@ import { MatCalComponent } from './mat-cal/mat-cal.component';
     JqueryDatatablesComponent,
     PdfExportComponent,
     MatConExComponent,
-    MatCalComponent
+    MatCalComponent,
+    AutocomExComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,9 @@ import { MatCalComponent } from './mat-cal/mat-cal.component';
     FormsModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatFormFieldModule
   ],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent],
