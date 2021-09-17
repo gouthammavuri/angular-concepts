@@ -23,6 +23,7 @@ import { MatCalComponent } from './mat-cal/mat-cal.component';
 import { AutocomExComponent } from './autocom-ex/autocom-ex.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ConfigurationService } from './services/configuration-service';
 
 
 @NgModule({
@@ -55,7 +56,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatAutocompleteModule,
     MatFormFieldModule
   ],
-  providers: [CurrencyPipe],
+  providers: [CurrencyPipe, ConfigurationService],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

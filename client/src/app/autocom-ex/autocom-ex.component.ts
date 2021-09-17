@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { AppSettings } from '../services/appsetting';
+import { ConfigurationService } from '../services/configuration-service';
 import { Queue } from './queue';
 
 @Component({
@@ -16,7 +18,7 @@ export class AutocomExComponent implements OnInit {
   searchKeywords: string[] = [];
   testQueue: Queue<string>;
 
-  constructor(public fb: FormBuilder) {
+  constructor(public fb: FormBuilder, public configurationService: ConfigurationService) {
     // considered queue size as 8, it represents the max search history to be shown in auto complete 
     this.testQueue = new Queue<string>(7);
   }
@@ -54,11 +56,16 @@ export class AutocomExComponent implements OnInit {
   private getSearchHistory() {
     this.searchKeywords = [];
     // get search history from local storage
-    let searchHistory: any = localStorage.getItem('searchHistory');
-    if (searchHistory) {
-      this.searchKeywords = JSON.parse(searchHistory) as string[];
-    }
-    this.searchKeywords.forEach(x=> this.testQueue.enqueue(x));
+    this.configurationService.getUserId().subscribe(x=> {
+      const userId = x;
+      this.configurationService.getSearchAutoComplete(userId, 'searchHistory').subscribe(searchHistory => {
+        console.log(searchHistory);
+        if (searchHistory && typeof(Object)) {
+          this.searchKeywords = JSON.parse(searchHistory.value) as string[];
+        }
+        this.searchKeywords.forEach(x=> this.testQueue.enqueue(x));
+      });
+    });
   }
 
   private setSearchHistory() {
@@ -73,6 +80,14 @@ export class AutocomExComponent implements OnInit {
     console.log(this.searchKeywords);
     // set search history to local storage
     if(this.searchKeywords.length > 0) {
+      this.configurationService.getUserId().subscribe(x=> {
+        const userId = x;
+        const searchHistory = new AppSettings('', 'searchHistory', JSON.stringify(this.searchKeywords), userId);
+        console.log(searchHistory);
+        this.configurationService.setSearchAutoComplete(searchHistory).subscribe(x=> {
+          console.log('Saved Successfully');
+        });
+      });
       localStorage.setItem('searchHistory', JSON.stringify(this.searchKeywords));
     }
   }
